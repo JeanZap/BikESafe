@@ -1,95 +1,97 @@
 # 🚲 BikESafe — E-Bike Segura
 
-> Aplicativo de mobilidade para ciclistas que mostra **rotas mais seguras** com base em alertas colaborativos: buracos, acidentes, trechos sem iluminação e ciclovias.
-> Projeto desenvolvido para o **Hack FAESA 2026**, com foco em Vitória - ES.
+> A mobility app for cyclists that shows **safer routes** based on crowdsourced alerts: potholes, accidents, unlit stretches and bike lanes.
+> Built for **Hack FAESA 2026**, focused on Vitória, Brazil.
 
 <p align="center">
-  <img src="prototipo/1.jpeg" width="260" alt="Mapa principal" />
-  <img src="prototipo/3.jpeg" width="260" alt="Opções de rota" />
-  <img src="prototipo/4.jpeg" width="260" alt="Navegação" />
+  <img src="prototipo/1.jpeg" width="260" alt="Main map" />
+  <img src="prototipo/3.jpeg" width="260" alt="Route options" />
+  <img src="prototipo/4.jpeg" width="260" alt="Navigation" />
 </p>
 
 ---
 
-## 📌 O problema
+## 📌 The problem
 
-Quem pedala na cidade não tem como saber, antes de sair, onde estão os buracos, os pontos de acidente ou as ruas escuras. Apps de navegação tradicionais otimizam só o **tempo**, não a **segurança** do ciclista.
+Cyclists have no way of knowing, before they set out, where the potholes, accident spots or dark streets are. Traditional navigation apps optimize only for **time**, not for the cyclist's **safety**.
 
-## 💡 A solução
+## 💡 The solution
 
-O BikESafe junta um mapa colaborativo de alertas com um roteador de bicicleta. Cada rota calculada recebe uma **pontuação de risco**, e o ciclista escolhe entre a opção *mais segura*, *mais rápida* ou *com menos subidas*. Durante o trajeto, o app acompanha o progresso, recalcula a rota se o ciclista sair dela e pergunta se os problemas registrados ainda existem.
+BikESafe combines a crowdsourced alert map with a bike router. Every calculated route gets a **risk score**, and the cyclist chooses between the *safest*, the *fastest* or the one *with the fewest hills*. During the ride, the app tracks progress, recalculates the route if the cyclist leaves it, and asks whether reported problems are still there.
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Features
 
-| | Funcionalidade | Descrição |
+| | Feature | Description |
 |---|---|---|
-| 🗺️ | **Mapa de alertas** | Marcadores de buraco, acidente, ciclovia e falta de luz, com filtros por tipo no cabeçalho. |
-| 🔥 | **Mapa de calor das ruas** | Trechos próximos a alertas ficam em tons de vermelho conforme o risco. |
-| 🔍 | **Busca de destinos** | Autocomplete de endereços, atalhos para *Casa* e *Trabalho* e sugestões próximas. |
-| 🛡️ | **Rotas por perfil** | *Mais segura*, *Mais rápida* e *Menos subidas*, cada uma com tempo, distância e quantidade de alertas no caminho. |
-| 🧭 | **Navegação** | Tempo restante, distância e velocidade média, recálculo automático fora da rota e som de chegada. |
-| 📣 | **Registrar alerta** | Foto, descrição (com sugestão do *Assistente*) e tipo do alerta: obstáculo ou acidente. |
-| 🕵️ | **Ocorrência anônima** | Relato de infração, condução perigosa ou bicicleta mal estacionada. |
-| ✅ | **Confirmação de incidentes** | Ao passar por um buraco ou acidente, o app pergunta se ele ainda está lá. |
-| 👤 | **Perfil** | Dados do ciclista e avaliação. |
-| 🧪 | **Simulação de trajeto** | Percorre a rota com velocidade de 1x, 3x ou 10x, útil para demonstrações. |
-| 🌐 | **Bilíngue** | Português ou inglês, conforme o idioma do aparelho (ou o idioma escolhido para o app no Android 13+). |
+| 🗺️ | **Alert map** | Markers for potholes, accidents, bike lanes and missing street lighting, with type filters in the header. |
+| 🔥 | **Street heat map** | Stretches near alerts turn shades of red according to their risk. |
+| 🔍 | **Destination search** | Address autocomplete, *Home* and *Work* shortcuts, and nearby suggestions. |
+| 🛡️ | **Route profiles** | *Safest*, *Fastest* and *Fewest hills*, each with time, distance and the number of alerts along the way. |
+| 🧭 | **Navigation** | Time left, distance and average speed, automatic rerouting when off route, and an arrival sound. |
+| 📣 | **Report an alert** | Photo, description (with a suggestion from the *Assistant*) and alert type: obstacle or accident. |
+| 🕵️ | **Anonymous incident report** | Report traffic violations, dangerous driving or badly parked bikes. |
+| ✅ | **Incident confirmation** | When you pass a pothole or accident, the app asks whether it is still there. |
+| 👤 | **Profile** | Cyclist details and rating. |
+| 🧪 | **Ride simulation** | Rides the route at 1x, 3x or 10x speed, handy for demos. |
+| 🌐 | **Bilingual** | Portuguese or English, following the device language (or the per-app language on Android 13+). |
 
 ---
 
-## 📱 Telas (protótipo)
+## 📱 Screens (prototype)
+
+The mockups are in Portuguese, the app's original language.
 
 <table>
   <tr>
-    <td align="center"><img src="prototipo/1.jpeg" width="220" /><br/><b>Mapa principal</b><br/><sub>Alertas, filtros e localização</sub></td>
-    <td align="center"><img src="prototipo/2.jpeg" width="220" /><br/><b>Busca</b><br/><sub>Casa, trabalho e sugestões</sub></td>
-    <td align="center"><img src="prototipo/3.jpeg" width="220" /><br/><b>Opções de rota</b><br/><sub>Segura, rápida ou plana</sub></td>
+    <td align="center"><img src="prototipo/1.jpeg" width="220" /><br/><b>Main map</b><br/><sub>Alerts, filters and location</sub></td>
+    <td align="center"><img src="prototipo/2.jpeg" width="220" /><br/><b>Search</b><br/><sub>Home, work and suggestions</sub></td>
+    <td align="center"><img src="prototipo/3.jpeg" width="220" /><br/><b>Route options</b><br/><sub>Safe, fast or flat</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="prototipo/4.jpeg" width="220" /><br/><b>Navegação</b><br/><sub>Tempo, distância e velocidade</sub></td>
-    <td align="center"><img src="prototipo/5.jpeg" width="220" /><br/><b>Detalhe do alerta</b><br/><sub>Foto, endereço e status</sub></td>
-    <td align="center"><img src="prototipo/6.jpeg" width="220" /><br/><b>Registrar alerta</b><br/><sub>Foto, descrição e tipo</sub></td>
+    <td align="center"><img src="prototipo/4.jpeg" width="220" /><br/><b>Navigation</b><br/><sub>Time, distance and speed</sub></td>
+    <td align="center"><img src="prototipo/5.jpeg" width="220" /><br/><b>Alert details</b><br/><sub>Photo, address and status</sub></td>
+    <td align="center"><img src="prototipo/6.jpeg" width="220" /><br/><b>Report an alert</b><br/><sub>Photo, description and type</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="prototipo/7.jpeg" width="220" /><br/><b>Menu lateral</b><br/><sub>Educação e suporte</sub></td>
-    <td align="center"><img src="prototipo/8.jpeg" width="220" /><br/><b>Perfil</b><br/><sub>Dados e avaliação</sub></td>
-    <td align="center"><img src="prototipo/9.jpeg" width="220" /><br/><b>App em execução</b><br/><sub>Painel de registro com B.O.</sub></td>
+    <td align="center"><img src="prototipo/7.jpeg" width="220" /><br/><b>Side menu</b><br/><sub>Education and support</sub></td>
+    <td align="center"><img src="prototipo/8.jpeg" width="220" /><br/><b>Profile</b><br/><sub>Details and rating</sub></td>
+    <td align="center"><img src="prototipo/9.jpeg" width="220" /><br/><b>Running app</b><br/><sub>Report panel with police report</sub></td>
   </tr>
 </table>
 
 ---
 
-## 🧠 Como a rota "mais segura" é escolhida
+## 🧠 How the "safest" route is chosen
 
-O roteador (OSRM) não aceita "evite estes pontos", então o BikESafe calcula as rotas alternativas normalmente e **pontua cada uma** pelos alertas que ficam perto dela (`src/services/route-safety.ts`):
+The router (OSRM) can't be told to "avoid these points", so BikESafe calculates the alternative routes normally and then **scores each one** by the alerts near it (`src/services/route-safety.ts`):
 
-| Alerta | Peso no risco | Raio considerado |
+| Alert | Risk weight | Radius |
 |---|---|---|
-| Falta de luz | `+1.5` | 30 m |
-| Acidente | `+1.0` (meia-vida de 12 h) | 30 m |
-| Buraco | `+0.1` | 30 m |
-| Ciclovia | `−1.0` (deixa a rota mais segura) | 50 m |
+| No lighting | `+1.5` | 30 m |
+| Accident | `+1.0` (12 h half-life) | 30 m |
+| Pothole | `+0.1` | 30 m |
+| Bike lane | `−1.0` (makes the route safer) | 50 m |
 
-- A rota de **menor risco** vira *Mais segura*. A de **menor duração** vira *Mais rápida*. Se as duas forem a mesma, ela aparece como *Mais rápida e segura*.
-- O **gradiente de calor** da rota (`route-heat.ts`) amostra a linha a cada ~20 m e soma a influência de cada alerta com um núcleo gaussiano (σ = 45 m).
-- Na **navegação** (`use-navigation.ts`), o app recalcula a rota quando o ciclista se afasta mais de 50 m dela e considera a chegada a menos de 30 m do destino.
+- The route with the **lowest risk** becomes *Safest*. The one with the **shortest duration** becomes *Fastest*. If they are the same route, it shows as *Fastest and safest*.
+- The route's **heat gradient** (`route-heat.ts`) samples the line every ~20 m and adds up the influence of each alert using a Gaussian kernel (σ = 45 m).
+- During **navigation** (`use-navigation.ts`), the app recalculates the route when the cyclist strays more than 50 m from it, and counts as arrived within 30 m of the destination.
 
 ---
 
-## 🛠️ Tecnologias
+## 🛠️ Tech stack
 
 - **[Expo SDK 58](https://docs.expo.dev/)** + **React Native 0.88** + **React 19** + **TypeScript**
-- **[Expo Router](https://docs.expo.dev/router/introduction/)**: navegação baseada em arquivos (`src/app/`)
-- **[MapLibre React Native](https://github.com/maplibre/maplibre-react-native)**: mapa vetorial
-- **[Zustand](https://github.com/pmndrs/zustand)**: estado global (alertas, ocorrências, navegação, lugares)
-- **[expo-localization](https://docs.expo.dev/versions/latest/sdk/localization/)**: idioma do aparelho (textos em `src/i18n/`)
+- **[Expo Router](https://docs.expo.dev/router/introduction/)**: file-based navigation (`src/app/`)
+- **[MapLibre React Native](https://github.com/maplibre/maplibre-react-native)**: vector map
+- **[Zustand](https://github.com/pmndrs/zustand)**: global state (alerts, incidents, navigation, places)
+- **[expo-localization](https://docs.expo.dev/versions/latest/sdk/localization/)**: device language (strings in `src/i18n/`)
 - `expo-location`, `expo-image-picker`, `expo-audio`, `react-native-reanimated`
 
-### Traduções
+### Translations
 
-Os textos ficam em `src/i18n/pt.ts` (que define as chaves) e `src/i18n/en.ts` (verificado pelo TypeScript para ter as mesmas chaves). Nos componentes, use `t`:
+Strings live in `src/i18n/pt.ts` (which defines the keys) and `src/i18n/en.ts` (type-checked to have the same keys). In components, use `t`:
 
 ```ts
 import { t } from '@/i18n';
@@ -98,101 +100,104 @@ t.profile.title;              // "Perfil" / "Profile"
 t.annotation.minutesAgo(5);   // "há 5 min" / "5 min ago"
 ```
 
-Qualquer idioma que não seja português usa inglês. As mensagens de permissão do iOS em português ficam em `languages/pt.json`.
+Any language other than Portuguese falls back to English. The Portuguese iOS permission messages are in `languages/pt.json`.
 
-### Serviços abertos (sem chave de API)
+### Open services (no API key)
 
-| Serviço | Uso |
+| Service | Used for |
 |---|---|
-| [OpenFreeMap](https://openfreemap.org/) | Estilo e tiles do mapa |
-| [OSRM / FOSSGIS](https://routing.openstreetmap.de/) | Rotas de bicicleta |
-| [Photon (Komoot)](https://photon.komoot.io/) | Busca de endereços (autocomplete) |
-| [Overpass / OpenStreetMap](https://overpass-api.de/) | Malha de ruas de Vitória para o mapa de calor |
+| [OpenFreeMap](https://openfreemap.org/) | Map style and tiles |
+| [OSRM / FOSSGIS](https://routing.openstreetmap.de/) | Bike routing |
+| [Photon (Komoot)](https://photon.komoot.io/) | Address search (autocomplete) |
+| [Overpass / OpenStreetMap](https://overpass-api.de/) | Vitória street network for the heat map |
 
-> Dados © colaboradores do OpenStreetMap (ODbL).
+> Data © OpenStreetMap contributors (ODbL).
 
 ---
 
-## 🚀 Como rodar
+## 🚀 Getting started
 
-### Pré-requisitos
+### Prerequisites
 
-- Node.js LTS e Yarn
-- Android Studio com SDK e um emulador (ou um aparelho com depuração USB)
+- Node.js LTS and Yarn
+- Android Studio with the SDK and an emulator (or a device with USB debugging)
 
-> ⚠️ O app usa **MapLibre**, um módulo nativo que **não roda no Expo Go**. É preciso um *development build*. Na web, o mapa não aparece (há um fallback só para o bundle não quebrar).
+> ⚠️ The app uses **MapLibre**, a native module that **does not run in Expo Go**. You need a *development build*. On the web the map is not shown (there is only a fallback so the bundle doesn't break).
 
-### Passo a passo
+### Step by step
 
 ```bash
-# 1. Instalar as dependências
+# 1. Install dependencies
 yarn install
 
-# 2. Compilar e abrir no Android (emulador ou aparelho)
+# 2. Build and open on Android (emulator or device)
 npx expo run:android
 
-# Nas próximas vezes, basta subir o Metro
+# After that, just start Metro
 npx expo start
 ```
 
-No iOS (requer macOS): `npx expo run:ios`.
+On iOS (requires macOS): `npx expo run:ios`.
 
-### Scripts úteis
+> After changing native config in `app.json` (plugins, permissions, locales), regenerate the native project with `npx expo prebuild --clean` before building.
 
-| Comando | O que faz |
+### Useful commands
+
+| Command | What it does |
 |---|---|
-| `npx expo start` | Sobe o servidor de desenvolvimento |
-| `npx expo run:android` | Gera e instala o build nativo no Android |
-| `npx expo lint` | Lint do projeto |
-| `npx tsc --noEmit` | Checagem de tipos |
-| `node scripts/fetch-streets.mjs` | Baixa a malha de ruas de Vitória e gera `src/data/vitoria-streets.json` |
+| `npx expo start` | Starts the dev server |
+| `npx expo run:android` | Builds and installs the native app on Android |
+| `npx expo lint` | Lints the project |
+| `npx tsc --noEmit` | Type-checks |
+| `node scripts/fetch-streets.mjs` | Downloads the Vitória street network and generates `src/data/vitoria-streets.json` |
 
-### Dicas para Windows
+### Windows tips
 
-- **Caminhos longos:** o build Android pode falhar por causa do limite de 260 caracteres. Execute `habilitar-caminhos-longos.reg` (como administrador) e reinicie.
-- **Erro `EBUSY` ao instalar pacotes:** o daemon do Gradle pode travar arquivos em `node_modules`. Rode `android\gradlew.bat --stop` antes de `yarn add`/`yarn install`.
-- **`rodar-android.bat`:** limpa caches, abre o emulador `Medium_Phone` e roda o build.
+- **Long paths:** the Android build can fail because of the 260-character path limit. Run `habilitar-caminhos-longos.reg` (as administrator) and restart.
+- **`EBUSY` error when installing packages:** the Gradle daemon can lock files in `node_modules`. Run `android\gradlew.bat --stop` before `yarn add`/`yarn install`.
+- **`rodar-android.bat`:** clears caches, opens the `Medium_Phone` emulator and runs the build.
 
 ---
 
-## 📂 Estrutura do projeto
+## 📂 Project structure
 
 ```
 src/
-├── app/                 # Telas (Expo Router)
-│   ├── index.tsx        # Mapa principal
-│   ├── route.tsx        # Planejamento e opções de rota
-│   └── profile.tsx      # Perfil do ciclista
+├── app/                 # Screens (Expo Router)
+│   ├── index.tsx        # Main map
+│   ├── route.tsx        # Route planning and options
+│   └── profile.tsx      # Cyclist profile
 ├── components/
-│   ├── map/             # Mapa, marcadores, painéis de alerta e ocorrência
-│   ├── route/           # Planejador de rota e marcador de destino
-│   ├── navigation/      # Painel de navegação (tempo, distância, velocidade)
-│   └── home/            # Cabeçalho de busca e marcador do usuário
-├── services/            # Rotas (OSRM), geocodificação, segurança, mapa de calor, sons
-├── hooks/               # Localização, navegação, busca, simulação, checagem de incidentes
-├── i18n/                # Textos em português e inglês
-├── store/               # Estado global com Zustand
-├── data/                # Alertas de exemplo e malha de ruas de Vitória
-└── constants/           # Tipos de alerta, cores da marca, tema e mapa
-prototipo/               # Mockups das telas
-scripts/                 # Scripts auxiliares (download da malha de ruas)
+│   ├── map/             # Map, markers, alert and incident panels
+│   ├── route/           # Route planner and destination marker
+│   ├── navigation/      # Navigation panel (time, distance, speed)
+│   └── home/            # Search header and user marker
+├── services/            # Routing (OSRM), geocoding, safety, heat map, sounds
+├── hooks/               # Location, navigation, search, simulation, incident checks
+├── i18n/                # Portuguese and English strings
+├── store/               # Global state with Zustand
+├── data/                # Sample alerts and Vitória street network
+└── constants/           # Alert types, brand colors, theme and map
+languages/               # Localized native strings (iOS permissions)
+prototipo/               # Screen mockups
+scripts/                 # Helper scripts (street network download)
 ```
 
 ---
 
-## 🗺️ Próximos passos
+## 🗺️ Next steps
 
-- [ ] Backend para persistir alertas e compartilhá-los entre usuários (hoje ficam só em memória)
-- [ ] Autenticação e edição de perfil
-- [ ] Dados de relevo reais para a rota *Menos subidas*
-- [ ] Assistente com IA para descrever alertas a partir da foto
-- [ ] Menu lateral com conteúdo de **Educação** (cartilhas de trânsito) e **Suporte técnico**
-- [ ] Moderação e validação colaborativa dos alertas
+- [ ] Backend to persist alerts and share them between users (today they live only in memory)
+- [ ] Authentication and profile editing
+- [ ] Real elevation data for the *Fewest hills* route
+- [ ] AI assistant that describes alerts from the photo
+- [ ] Side menu with **Education** content (traffic safety guides) and **Tech support**
+- [ ] Moderation and crowdsourced validation of alerts
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE).
+Distributed under the MIT license. See [`LICENSE`](LICENSE).
 
-<p align="center"><sub>Feito com 💚 para o Hack FAESA 2026</sub></p>
+<p align="center"><sub>Made with 💚 for Hack FAESA 2026</sub></p>

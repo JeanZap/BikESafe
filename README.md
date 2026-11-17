@@ -200,4 +200,4 @@ scripts/                 # Helper scripts (street network download)
 
 Distributed under the MIT license. See [`LICENSE`](LICENSE).
 
-<p align="center"><sub>Made with 💚 for Hack FAESA 2026</sub></p>
+<p align="center"><sub>Feito com 💚 para o Hack FAESA 2026</sub></p>

@@ -1,0 +1,271 @@
+import type { Annotation } from '@/store/annotations-store';
+
+/**
+ * Anotações de exemplo (fictícias) em Vitória - ES, para popular o mapa
+ * enquanto não há backend. Coordenadas em [longitude, latitude].
+ */
+const hoursAgo = (h: number) => new Date(Date.now() - h * 3_600_000).toISOString();
+
+export const VITORIA_ANNOTATIONS: Annotation[] = [
+  // Buracos
+  {
+    id: 'vix-1',
+    type: 'pothole',
+    coordinates: [-40.2972, -20.2958],
+    title: 'Buraco na Reta da Penha',
+    description: 'Buraco grande na faixa da direita, sentido Praia do Canto.',
+    createdAt: hoursAgo(2),
+  },
+  {
+    id: 'vix-2',
+    type: 'pothole',
+    coordinates: [-40.3082, -20.3005],
+    title: 'Asfalto afundado na Leitão da Silva',
+    description: 'Afundamento perto do cruzamento; cuidado ao desviar.',
+    createdAt: hoursAgo(9),
+  },
+  {
+    id: 'vix-3',
+    type: 'pothole',
+    coordinates: [-40.3378, -20.3196],
+    title: 'Buraco na Av. Jerônimo Monteiro',
+    description: 'Centro, próximo ao ponto de ônibus.',
+    createdAt: hoursAgo(26),
+  },
+  {
+    id: 'vix-4',
+    type: 'pothole',
+    coordinates: [-40.2935, -20.2852],
+    title: 'Bueiro sem tampa em Jardim da Penha',
+    createdAt: hoursAgo(4),
+  },
+
+  // Acidentes
+  {
+    id: 'vix-5',
+    type: 'accident',
+    coordinates: [-40.2893, -20.3072],
+    title: 'Acidente na Terceira Ponte',
+    description: 'Colisão entre carros na cabeceira de Vitória. Trânsito lento.',
+    createdAt: hoursAgo(0.5),
+  },
+  {
+    id: 'vix-6',
+    type: 'accident',
+    coordinates: [-40.3045, -20.2785],
+    title: 'Ciclista atropelado na Fernando Ferrari',
+    description: 'Próximo à UFES (Goiabeiras). Atenção redobrada.',
+    createdAt: hoursAgo(3),
+  },
+  {
+    id: 'vix-7',
+    type: 'accident',
+    coordinates: [-40.3238, -20.3112],
+    title: 'Batida na Av. Vitória',
+    description: 'Jucutuquara, faixa da esquerda interditada.',
+    createdAt: hoursAgo(12),
+  },
+
+  // Ciclovias
+  {
+    id: 'vix-8',
+    type: 'bikeLane',
+    coordinates: [-40.2705, -20.2688],
+    title: 'Ciclovia da orla de Camburi',
+    description: 'Ciclovia contínua ao longo da praia, boa sinalização.',
+    createdAt: hoursAgo(48),
+  },
+  {
+    id: 'vix-9',
+    type: 'bikeLane',
+    coordinates: [-40.2958, -20.2940],
+    title: 'Ciclovia da Reta da Penha',
+    description: 'Canteiro central, liga Praia do Canto a Santa Lúcia.',
+    createdAt: hoursAgo(72),
+  },
+  {
+    id: 'vix-10',
+    type: 'bikeLane',
+    coordinates: [-40.3480, -20.3208],
+    title: 'Ciclovia da Beira-Mar',
+    description: 'Trecho do Centro até a Vila Rubim.',
+    createdAt: hoursAgo(30),
+  },
+  {
+    id: 'vix-11',
+    type: 'bikeLane',
+    coordinates: [-40.2932, -20.3148],
+    title: 'Ciclofaixa da Enseada do Suá',
+    description: 'Pintura apagada em alguns trechos.',
+    createdAt: hoursAgo(20),
+  },
+  {
+    id: 'vix-12',
+    type: 'bikeLane',
+    coordinates: [-40.2948, -20.2728],
+    title: 'Ciclovia da Adalberto Simão Nader',
+    createdAt: hoursAgo(96),
+  },
+
+  // Falta de luz
+  {
+    id: 'vix-13',
+    type: 'noLight',
+    coordinates: [-40.2925, -20.2782],
+    title: 'Sem iluminação no Parque Pedra da Cebola',
+    description: 'Entorno do parque muito escuro à noite.',
+    createdAt: hoursAgo(14),
+  },
+  {
+    id: 'vix-14',
+    type: 'noLight',
+    coordinates: [-40.2832, -20.3102],
+    title: 'Postes apagados na Ilha do Boi',
+    createdAt: hoursAgo(6),
+  },
+  {
+    id: 'vix-15',
+    type: 'noLight',
+    coordinates: [-40.3112, -20.3152],
+    title: 'Rua escura em Bento Ferreira',
+    description: 'Três postes seguidos sem luz.',
+    createdAt: hoursAgo(18),
+  },
+  {
+    id: 'vix-16',
+    type: 'noLight',
+    coordinates: [-40.2842, -20.2802],
+    title: 'Iluminação fraca na Mata da Praia',
+    createdAt: hoursAgo(40),
+  },
+
+  // Centro — entorno da Rua José Marcelino / Catedral Metropolitana
+  {
+    id: 'vix-17',
+    type: 'pothole',
+    coordinates: [-40.3369, -20.3201],
+    title: 'Paralelepípedo solto na José Marcelino',
+    description: 'Calçamento irregular em frente à Catedral; desça da bike se estiver molhado.',
+    createdAt: hoursAgo(1),
+  },
+  {
+    id: 'vix-18',
+    type: 'noLight',
+    coordinates: [-40.3383, -20.3197],
+    title: 'Trecho escuro na José Marcelino',
+    description: 'Postes apagados no fim da rua, sentido Cidade Alta.',
+    createdAt: hoursAgo(5),
+  },
+  {
+    id: 'vix-19',
+    type: 'accident',
+    coordinates: [-40.3373, -20.3203],
+    title: 'Queda de ciclista na ladeira',
+    description: 'Descida íngreme ao lado da Catedral, piso escorregadio.',
+    createdAt: hoursAgo(7),
+  },
+  {
+    id: 'vix-20',
+    type: 'noLight',
+    coordinates: [-40.3380, -20.3208],
+    title: 'Escadaria Maria Ortiz sem luz',
+    description: 'Iluminação da escadaria desligada à noite.',
+    createdAt: hoursAgo(11),
+  },
+  {
+    id: 'vix-21',
+    type: 'pothole',
+    coordinates: [-40.3358, -20.3191],
+    title: 'Buraco na Rua Graciano Neves',
+    createdAt: hoursAgo(15),
+  },
+  {
+    id: 'vix-22',
+    type: 'bikeLane',
+    coordinates: [-40.3369, -20.3179],
+    title: 'Rota compartilhada na Sete de Setembro',
+    description: 'Rua calma do Centro, boa alternativa à Jerônimo Monteiro.',
+    createdAt: hoursAgo(50),
+  },
+  {
+    id: 'vix-23',
+    type: 'accident',
+    coordinates: [-40.3357, -20.3203],
+    title: 'Colisão perto da Praça Costa Pereira',
+    description: 'Carro fechou ciclista na saída do ponto de ônibus.',
+    createdAt: hoursAgo(2.5),
+  },
+  {
+    id: 'vix-24',
+    type: 'bikeLane',
+    coordinates: [-40.3364, -20.3196],
+    title: 'Bicicletário na José Marcelino',
+    description: 'Paraciclos próximos à Catedral, no início da rua.',
+    createdAt: hoursAgo(80),
+  },
+
+  // Centro — a leste da José Marcelino (Jerônimo Monteiro → Princesa Isabel)
+  {
+    id: 'vix-25',
+    type: 'accident',
+    coordinates: [-40.3346, -20.3202],
+    title: 'Ciclista atingido por porta na Jerônimo Monteiro',
+    description: 'Carro estacionado abriu a porta sem olhar. Mantenha distância dos carros parados.',
+    createdAt: hoursAgo(1.5),
+  },
+  {
+    id: 'vix-26',
+    type: 'pothole',
+    coordinates: [-40.3322, -20.3199],
+    title: 'Buraco na faixa da direita da Jerônimo Monteiro',
+    description: 'Perto da esquina com a Princesa Isabel.',
+    createdAt: hoursAgo(8),
+  },
+  {
+    id: 'vix-27',
+    type: 'bikeLane',
+    coordinates: [-40.3331, -20.3212],
+    title: 'Ciclovia da Beira-Mar (Mascarenhas de Moraes)',
+    description: 'Trecho segregado ao lado da baía, boa opção para atravessar o Centro.',
+    createdAt: hoursAgo(60),
+  },
+  {
+    id: 'vix-28',
+    type: 'noLight',
+    coordinates: [-40.3310, -20.3214],
+    title: 'Postes apagados na Beira-Mar',
+    description: 'Trecho de uns 100 m sem luz em frente ao cais.',
+    createdAt: hoursAgo(10),
+  },
+  {
+    id: 'vix-29',
+    type: 'pothole',
+    coordinates: [-40.3296, -20.3197],
+    title: 'Tampa de bueiro afundada na Princesa Isabel',
+    createdAt: hoursAgo(19),
+  },
+  {
+    id: 'vix-30',
+    type: 'accident',
+    coordinates: [-40.3301, -20.3190],
+    title: 'Conversão perigosa na Princesa Isabel',
+    description: 'Ônibus fazendo conversão fecham a faixa; quase-acidente registrado hoje.',
+    createdAt: hoursAgo(4),
+  },
+  {
+    id: 'vix-31',
+    type: 'noLight',
+    coordinates: [-40.3291, -20.3178],
+    title: 'Rua escura na Barão de Monjardim',
+    description: 'Ladeira sem iluminação à noite, subida para a Gruta da Onça.',
+    createdAt: hoursAgo(22),
+  },
+  {
+    id: 'vix-32',
+    type: 'bikeLane',
+    coordinates: [-40.3284, -20.3170],
+    title: 'Parque Gruta da Onça',
+    description: 'Parque com bicicletário na entrada; ponto de parada na rota pelo Centro.',
+    createdAt: hoursAgo(120),
+  },
+];

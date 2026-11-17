@@ -52,6 +52,7 @@ import {
 } from '@/store/annotations-store';
 import { useNavigationStore } from '@/store/navigation-store';
 import { type NewOccurrence, useOccurrencesStore } from '@/store/occurrences-store';
+import { t } from '@/i18n';
 
 /** Cor da rota em navegação (mesma da rota escolhida no protótipo 3). */
 const NAV_ROUTE_COLOR = '#14B8A6';
@@ -218,9 +219,9 @@ export function BikeMap() {
   }, [arrived, stopNavigation]);
 
   const confirmStop = useCallback(() => {
-    Alert.alert('Encerrar rota?', 'A navegação até o destino será interrompida.', [
-      { text: 'Continuar', style: 'cancel' },
-      { text: 'Encerrar', style: 'destructive', onPress: stopNavigation },
+    Alert.alert(t.map.stopRouteTitle, t.map.stopRouteMessage, [
+      { text: t.map.continue, style: 'cancel' },
+      { text: t.map.stop, style: 'destructive', onPress: stopNavigation },
     ]);
   }, [stopNavigation]);
 
@@ -301,7 +302,7 @@ export function BikeMap() {
       const to: LngLat = [event.nativeEvent.lngLat[0], event.nativeEvent.lngLat[1]];
       setQuery('');
       setSearchEnabled(false);
-      goTo({ coordinates: to, title: 'Ponto no mapa' });
+      goTo({ coordinates: to, title: t.map.pointOnMap });
     },
     [goTo, resultsOpen, picking, selectedAnnotation, selectAnnotation, navigating]
   );
@@ -385,9 +386,8 @@ export function BikeMap() {
       const created = addOccurrence(input);
       setOccurrenceOpen(false);
       Alert.alert(
-        'Ocorrência registrada',
-        `Obrigado! Seu relato foi enviado de forma anônima.
-Protocolo: ${created.protocol}`
+        t.map.occurrenceSentTitle,
+        t.map.occurrenceSentMessage(created.protocol)
       );
     },
     [addOccurrence]
@@ -395,11 +395,11 @@ Protocolo: ${created.protocol}`
 
   const locationMessage =
     locationStatus === 'denied'
-      ? { text: 'Permita o acesso à localização para traçar rotas.', action: 'Permitir' }
+      ? { text: t.map.locationDenied, action: t.common.allow }
       : locationStatus === 'error'
-        ? { text: 'Não foi possível obter sua localização.', action: 'Tentar de novo' }
+        ? { text: t.map.locationError, action: t.common.tryAgain }
         : locationStatus === 'loading' || !position
-          ? { text: 'Obtendo sua localização…', action: null }
+          ? { text: t.common.gettingLocation, action: null }
           : null;
 
   return (
@@ -555,7 +555,7 @@ Protocolo: ${created.protocol}`
           <Pressable
             onPress={recenter}
             accessibilityRole="button"
-            accessibilityLabel="Centralizar na minha localização"
+            accessibilityLabel={t.map.centerA11y}
             style={({ pressed }) => [styles.mapButton, pressed && styles.pressed]}>
             <Icon name="recenter" size={28} color={Brand.text} />
           </Pressable>
@@ -564,14 +564,14 @@ Protocolo: ${created.protocol}`
               <Pressable
                 onPress={sim.cycleSpeed}
                 accessibilityRole="button"
-                accessibilityLabel="Velocidade da simulação"
+                accessibilityLabel={t.map.simSpeedA11y}
                 style={({ pressed }) => [styles.mapButton, pressed && styles.pressed]}>
                 <Text style={styles.simSpeedText}>{sim.speed}x</Text>
               </Pressable>
               <Pressable
                 onPress={sim.toggle}
                 accessibilityRole="button"
-                accessibilityLabel={sim.running ? 'Pausar simulação' : 'Simular percurso'}
+                accessibilityLabel={sim.running ? t.map.simPauseA11y : t.map.simStartA11y}
                 style={({ pressed }) => [
                   styles.mapButton,
                   sim.running && styles.simActive,
@@ -587,7 +587,7 @@ Protocolo: ${created.protocol}`
             <Pressable
               onPress={confirmStop}
               accessibilityRole="button"
-              accessibilityLabel="Encerrar rota"
+              accessibilityLabel={t.map.stopRoute}
               style={({ pressed }) => [styles.mapButton, pressed && styles.pressed]}>
               <Icon name="stop" size={28} color={Brand.danger} />
             </Pressable>
@@ -605,9 +605,9 @@ Protocolo: ${created.protocol}`
           {picking ? (
             <View style={styles.pickHint}>
               <Icon name="pin" size={22} color={Brand.mintText} />
-              <Text style={styles.pickHintText}>Toque no mapa para marcar o local</Text>
+              <Text style={styles.pickHintText}>{t.map.pickHint}</Text>
               <Pressable onPress={cancelReport} hitSlop={8} accessibilityRole="button">
-                <Text style={styles.pickHintCancel}>Cancelar</Text>
+                <Text style={styles.pickHintCancel}>{t.common.cancel}</Text>
               </Pressable>
             </View>
           ) : selectedAnnotation ? (
@@ -621,7 +621,7 @@ Protocolo: ${created.protocol}`
               <Pressable
                 onPress={startReport}
                 accessibilityRole="button"
-                accessibilityLabel="Registrar Alerta"
+                accessibilityLabel={t.map.reportAlertA11y}
                 style={({ pressed }) => [
                   styles.reportButton,
                   styles.alertButton,
@@ -632,13 +632,13 @@ Protocolo: ${created.protocol}`
                   <Text style={[styles.reportButtonCaption, { color: Brand.mintText }]}>
                     Registrar
                   </Text>
-                  <Text style={[styles.reportButtonText, { color: Brand.mintText }]}>Alerta</Text>
+                  <Text style={[styles.reportButtonText, { color: Brand.mintText }]}>{t.map.alert}</Text>
                 </View>
               </Pressable>
               <Pressable
                 onPress={openOccurrence}
                 accessibilityRole="button"
-                accessibilityLabel="Registrar ocorrência"
+                accessibilityLabel={t.map.reportOccurrenceA11y}
                 style={({ pressed }) => [
                   styles.reportButton,
                   styles.occurrenceButton,
@@ -649,7 +649,7 @@ Protocolo: ${created.protocol}`
                   <Text style={[styles.reportButtonCaption, { color: Brand.orange }]}>
                     Registrar
                   </Text>
-                  <Text style={[styles.reportButtonText, { color: Brand.orange }]}>Ocorrência</Text>
+                  <Text style={[styles.reportButtonText, { color: Brand.orange }]}>{t.map.occurrence}</Text>
                 </View>
               </Pressable>
             </View>

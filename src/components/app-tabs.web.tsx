@@ -14,6 +14,7 @@ import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
 import { ExternalLink } from './external-link';
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
+import { t } from '@/i18n';
 
 export default function AppTabs() {
   return (
@@ -22,10 +23,10 @@ export default function AppTabs() {
       <TabList asChild>
         <CustomTabList>
           <TabTrigger name="home" href="/" asChild>
-            <TabButton>Mapa</TabButton>
+            <TabButton>{t.tabs.map}</TabButton>
           </TabTrigger>
           <TabTrigger name="explore" href="/explore" asChild>
-            <TabButton>Explore</TabButton>
+            <TabButton>{t.tabs.explore}</TabButton>
           </TabTrigger>
         </CustomTabList>
       </TabList>

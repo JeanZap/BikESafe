@@ -1,6 +1,7 @@
 import type { AlertType } from '@/constants/alerts';
 import type { BikeRoute, LngLat } from '@/services/osrm';
 import type { Annotation } from '@/store/annotations-store';
+import { t } from '@/i18n';
 
 /**
  * Pontuação de segurança de uma rota a partir das anotações do mapa.
@@ -99,10 +100,10 @@ export function scoreRoute(route: BikeRoute, annotations: Annotation[]): RouteSa
   };
 }
 
-const HAZARD_LABELS: Record<HazardType, [singular: string, plural: string]> = {
-  accident: ['acidente', 'acidentes'],
-  pothole: ['buraco', 'buracos'],
-  noLight: ['trecho escuro', 'trechos escuros'],
+const HAZARD_LABELS: Record<HazardType, readonly string[]> = {
+  accident: t.hazards.accident,
+  pothole: t.hazards.pothole,
+  noLight: t.hazards.noLight,
 };
 
 /** Resumo curto para o card da rota, ex.: "1 acidente · 2 buracos". */
@@ -113,7 +114,7 @@ export function describeSafety(safety: RouteSafety) {
       const n = safety.counts[t];
       return `${n} ${HAZARD_LABELS[t][n === 1 ? 0 : 1]}`;
     });
-  if (parts.length === 0) parts.push('Sem alertas no caminho');
-  if (safety.counts.bikeLane > 0) parts.push('ciclovia');
+  if (parts.length === 0) parts.push(t.hazards.none);
+  if (safety.counts.bikeLane > 0) parts.push(t.hazards.bikeLane);
   return parts.join(' · ');
 }

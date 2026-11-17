@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { GeocodingError, type Place, searchPlaces } from '@/services/geocoding';
 import { isAbortError, type LngLat } from '@/services/osrm';
+import { t } from '@/i18n';
 
 const DEBOUNCE_MS = 400;
 const MIN_CHARS = 3;
@@ -42,7 +43,7 @@ export function usePlaceSearch(query: string, near: LngLat | null, enabled: bool
         if (isAbortError(err)) return;
         setState({
           status: 'error',
-          message: err instanceof GeocodingError ? err.message : 'Erro ao buscar endereços.',
+          message: err instanceof GeocodingError ? err.message : t.errors.searchFailed,
         });
       }
     }, DEBOUNCE_MS);

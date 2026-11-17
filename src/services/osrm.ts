@@ -1,3 +1,4 @@
+import { formatDecimal, t } from '@/i18n';
 /**
  * Cálculo de rotas de bicicleta via OSRM.
  *
@@ -66,19 +67,19 @@ export async function getBikeRoute(
     res = await fetch(url, { headers: { 'User-Agent': USER_AGENT }, signal });
   } catch (err) {
     if (isAbortError(err)) throw err;
-    throw new RouteError('Sem conexão com o servidor de rotas.');
+    throw new RouteError(t.errors.routeOffline);
   }
 
   if (res.status === 429) {
-    throw new RouteError('Muitas requisições. Aguarde um instante e tente de novo.');
+    throw new RouteError(t.errors.routeRateLimited);
   }
 
   const json = await res.json().catch(() => null);
   if (!res.ok || !json || json.code !== 'Ok' || !json.routes?.length) {
     if (json?.code === 'NoRoute') {
-      throw new RouteError('Não foi encontrada rota de bicicleta até esse ponto.');
+      throw new RouteError(t.errors.routeNotFound);
     }
-    throw new RouteError(json?.message ?? 'Não foi possível calcular a rota.');
+    throw new RouteError(json?.message ?? t.errors.routeFailed);
   }
 
   const route = json.routes[0];
@@ -108,17 +109,17 @@ async function fetchRoutes(
     res = await fetch(url, { headers: { 'User-Agent': USER_AGENT }, signal });
   } catch (err) {
     if (isAbortError(err)) throw err;
-    throw new RouteError('Sem conexão com o servidor de rotas.');
+    throw new RouteError(t.errors.routeOffline);
   }
   if (res.status === 429) {
-    throw new RouteError('Muitas requisições. Aguarde um instante e tente de novo.');
+    throw new RouteError(t.errors.routeRateLimited);
   }
   const json = await res.json().catch(() => null);
   if (!res.ok || !json || json.code !== 'Ok' || !json.routes?.length) {
     if (json?.code === 'NoRoute') {
-      throw new RouteError('Não foi encontrada rota de bicicleta até esse ponto.');
+      throw new RouteError(t.errors.routeNotFound);
     }
-    throw new RouteError(json?.message ?? 'Não foi possível calcular a rota.');
+    throw new RouteError(json?.message ?? t.errors.routeFailed);
   }
   return json.routes.map((route: { geometry: RouteGeometry; distance: number; duration: number }) => ({
     geometry: route.geometry,
@@ -224,7 +225,7 @@ export function getBounds(coords: LngLat[]): [number, number, number, number] {
 
 export function formatDistance(meters: number) {
   if (meters < 1000) return `${Math.round(meters)} m`;
-  return `${(meters / 1000).toFixed(meters < 10000 ? 1 : 0).replace('.', ',')} km`;
+  return `${formatDecimal(meters / 1000, meters < 10000 ? 1 : 0)} km`;
 }
 
 export function formatDuration(seconds: number) {

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Brand } from '@/constants/brand';
+import { t } from '@/i18n';
 
 const HALO = 64;
 const LABEL_HEIGHT = 34;
@@ -15,7 +16,7 @@ export function UserLocationMarker() {
   return (
     <View style={styles.container} pointerEvents="none">
       <View style={styles.label}>
-        <Text style={styles.labelText}>Sua Localização</Text>
+        <Text style={styles.labelText}>{t.map.yourLocationMarker}</Text>
       </View>
       <View style={styles.halo}>
         <View style={styles.dot} />

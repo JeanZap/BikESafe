@@ -5,6 +5,7 @@ import { AlertIcon } from '@/components/alert-icon';
 import { ALERT_TYPE_BY_ID } from '@/constants/alerts';
 import { Brand, BrandShadow } from '@/constants/brand';
 import type { Annotation } from '@/store/annotations-store';
+import { t } from '@/i18n';
 
 type Props = {
   annotation: Annotation;
@@ -35,12 +36,12 @@ export function AnnotationCard({ annotation, onRoute, onClose }: Props) {
         <Pressable
           onPress={onRoute}
           style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]}>
-          <Text style={styles.primaryButtonText}>Rota até aqui</Text>
+          <Text style={styles.primaryButtonText}>{t.annotation.routeHere}</Text>
         </Pressable>
         <Pressable
           onPress={onClose}
           style={({ pressed }) => [styles.secondaryButton, pressed && styles.pressed]}>
-          <Text style={styles.secondaryButtonText}>Fechar</Text>
+          <Text style={styles.secondaryButtonText}>{t.common.close}</Text>
         </Pressable>
       </View>
     </View>
@@ -49,12 +50,12 @@ export function AnnotationCard({ annotation, onRoute, onClose }: Props) {
 
 function timeAgo(iso: string) {
   const minutes = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60_000));
-  if (minutes < 1) return 'agora';
-  if (minutes < 60) return `há ${minutes} min`;
+  if (minutes < 1) return t.annotation.now;
+  if (minutes < 60) return t.annotation.minutesAgo(minutes);
   const hours = Math.round(minutes / 60);
-  if (hours < 24) return `há ${hours} h`;
+  if (hours < 24) return t.annotation.hoursAgo(hours);
   const days = Math.round(hours / 24);
-  return days === 1 ? 'há 1 dia' : `há ${days} dias`;
+  return t.annotation.daysAgo(days);
 }
 
 const styles = StyleSheet.create({

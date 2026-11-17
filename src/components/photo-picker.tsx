@@ -4,6 +4,7 @@ import { Alert, Pressable, type StyleProp, StyleSheet, Text, type ViewStyle } fr
 
 import { Icon } from '@/components/icon';
 import { Brand } from '@/constants/brand';
+import { t } from '@/i18n';
 
 type Props = {
   uri: string | null;
@@ -19,8 +20,8 @@ export function PhotoPicker({ uri, onChange, style }: Props) {
         const permission = await ImagePicker.requestCameraPermissionsAsync();
         if (!permission.granted) {
           Alert.alert(
-            'Câmera bloqueada',
-            'Permita o acesso à câmera nas configurações para fotografar o local.'
+            t.photo.cameraBlockedTitle,
+            t.photo.cameraBlockedMessage
           );
           return;
         }
@@ -37,15 +38,15 @@ export function PhotoPicker({ uri, onChange, style }: Props) {
           : await ImagePicker.launchImageLibraryAsync(options);
       if (!result.canceled && result.assets[0]) onChange(result.assets[0].uri);
     } catch {
-      Alert.alert('Foto', 'Não foi possível abrir a câmera ou a galeria.');
+      Alert.alert(t.photo.title, t.photo.openFailed);
     }
   };
 
   const chooseSource = () => {
-    Alert.alert('Adicionar foto', undefined, [
-      { text: 'Câmera', onPress: () => pick('camera') },
-      { text: 'Galeria', onPress: () => pick('library') },
-      { text: 'Cancelar', style: 'cancel' },
+    Alert.alert(t.photo.add, undefined, [
+      { text: t.photo.camera, onPress: () => pick('camera') },
+      { text: t.photo.library, onPress: () => pick('library') },
+      { text: t.common.cancel, style: 'cancel' },
     ]);
   };
 
@@ -53,7 +54,7 @@ export function PhotoPicker({ uri, onChange, style }: Props) {
     <Pressable
       onPress={chooseSource}
       accessibilityRole="button"
-      accessibilityLabel={uri ? 'Trocar foto' : 'Adicionar foto'}
+      accessibilityLabel={uri ? t.photo.change : t.photo.add}
       style={({ pressed }) => [
         styles.photo,
         uri && styles.photoFilled,
@@ -67,7 +68,7 @@ export function PhotoPicker({ uri, onChange, style }: Props) {
             onPress={() => onChange(null)}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Remover foto"
+            accessibilityLabel={t.photo.remove}
             style={styles.photoRemove}>
             <Icon name="close" size={26} color="#FFFFFF" />
           </Pressable>
@@ -75,7 +76,7 @@ export function PhotoPicker({ uri, onChange, style }: Props) {
       ) : (
         <>
           <Icon name="camera" size={28} color={Brand.text} />
-          <Text style={styles.photoText}>FOTO</Text>
+          <Text style={styles.photoText}>{t.photo.label}</Text>
         </>
       )}
     </Pressable>

@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-nati
 
 import { Brand, BrandShadow } from '@/constants/brand';
 import type { NavigationProgress } from '@/hooks/use-navigation';
+import { t } from '@/i18n';
 
 type Props = {
   progress: NavigationProgress;
@@ -37,24 +38,24 @@ export function NavigationPanel({ progress, bottomInset, onStop, onLayout }: Pro
       <Pressable
         onPress={() => setExpanded((v) => !v)}
         accessibilityRole="button"
-        accessibilityLabel={expanded ? 'Recolher painel da rota' : 'Expandir painel da rota'}
+        accessibilityLabel={expanded ? t.navigation.collapseA11y : t.navigation.expandA11y}
         hitSlop={8}
         style={styles.handleArea}>
         <View style={styles.handle} />
       </Pressable>
 
       <Pressable onPress={() => setExpanded((v) => !v)} style={styles.stats}>
-        <Stat label="Temp. faltante" value={time} unit={timeUnit} />
+        <Stat label={t.navigation.timeLeft} value={time} unit={timeUnit} />
         <View style={styles.divider} />
-        <Stat label="Distância" value={dist} unit={distUnit} />
+        <Stat label={t.navigation.distance} value={dist} unit={distUnit} />
         <View style={styles.divider} />
-        <Stat label="Vel. Méd." value={speed} unit="km/h" />
+        <Stat label={t.navigation.avgSpeed} value={speed} unit="km/h" />
       </Pressable>
 
       {progress.rerouting && (
         <View style={styles.rerouting}>
           <ActivityIndicator size="small" color={Brand.teal} />
-          <Text style={styles.reroutingText}>Recalculando rota…</Text>
+          <Text style={styles.reroutingText}>{t.navigation.rerouting}</Text>
         </View>
       )}
 
@@ -70,7 +71,7 @@ export function NavigationPanel({ progress, bottomInset, onStop, onLayout }: Pro
             onPress={onStop}
             accessibilityRole="button"
             style={({ pressed }) => [styles.stopButton, pressed && styles.pressed]}>
-            <Text style={styles.stopButtonText}>Encerrar rota</Text>
+            <Text style={styles.stopButtonText}>{t.map.stopRoute}</Text>
           </Pressable>
         </View>
       )}

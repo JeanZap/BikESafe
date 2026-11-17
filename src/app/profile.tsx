@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon } from '@/components/icon';
 import { Brand, BrandShadow } from '@/constants/brand';
+import { formatDecimal, t } from '@/i18n';
 
 /** Dados fixos do protótipo, até existir login/backend. */
 const PROFILE = {
@@ -25,19 +26,19 @@ export default function ProfileScreen() {
   };
 
   const signOut = () => {
-    Alert.alert('Sair', 'Deseja sair da sua conta?', [
-      { text: 'Cancelar', style: 'cancel' },
-      { text: 'Sair', onPress: goBack },
+    Alert.alert(t.profile.signOut, t.profile.signOutConfirm, [
+      { text: t.common.cancel, style: 'cancel' },
+      { text: t.profile.signOut, onPress: goBack },
     ]);
   };
 
   const deleteAccount = () => {
     Alert.alert(
-      'Excluir conta',
-      'Esta ação não pode ser desfeita. Seus dados e alertas serão removidos.',
+      t.profile.deleteAccount,
+      t.profile.deleteAccountConfirm,
       [
-        { text: 'Cancelar', style: 'cancel' },
-        { text: 'Excluir', style: 'destructive', onPress: goBack },
+        { text: t.common.cancel, style: 'cancel' },
+        { text: t.profile.delete, style: 'destructive', onPress: goBack },
       ]
     );
   };
@@ -48,11 +49,11 @@ export default function ProfileScreen() {
         <Pressable
           onPress={goBack}
           accessibilityRole="button"
-          accessibilityLabel="Voltar"
+          accessibilityLabel={t.common.back}
           style={({ pressed }) => [styles.backButton, pressed && styles.pressed]}>
           <Icon name="back" size={20} color={Brand.text} />
         </Pressable>
-        <Text style={styles.title}>Perfil</Text>
+        <Text style={styles.title}>{t.profile.title}</Text>
         {/* Espaço simétrico ao botão de voltar para centralizar o título. */}
         <View style={styles.headerSpacer} />
       </View>
@@ -70,21 +71,21 @@ export default function ProfileScreen() {
         <View
           style={styles.ratingRow}
           accessible
-          accessibilityLabel={`Avaliação ${PROFILE.rating}`}>
+          accessibilityLabel={t.profile.ratingA11y(formatDecimal(PROFILE.rating, 1))}>
           <Icon name="star" size={30} color={Brand.amber} />
-          <Text style={styles.ratingValue}>{PROFILE.rating.toFixed(1).replace('.', ',')}</Text>
-          <Text style={styles.ratingLabel}>Avaliação</Text>
+          <Text style={styles.ratingValue}>{formatDecimal(PROFILE.rating, 1)}</Text>
+          <Text style={styles.ratingLabel}>{t.profile.rating}</Text>
         </View>
 
         <View style={styles.form}>
-          <Text style={styles.label}>Nome</Text>
+          <Text style={styles.label}>{t.profile.name}</Text>
           <View style={styles.field}>
             <Text style={styles.fieldText} numberOfLines={1}>
               {PROFILE.name}
             </Text>
           </View>
 
-          <Text style={[styles.label, styles.labelSpaced]}>Email ou Telefone</Text>
+          <Text style={[styles.label, styles.labelSpaced]}>{t.profile.contact}</Text>
           <View style={styles.field}>
             <Text style={styles.fieldText} numberOfLines={1}>
               {PROFILE.contact}
@@ -100,14 +101,14 @@ export default function ProfileScreen() {
             accessibilityRole="button"
             hitSlop={8}
             style={({ pressed }) => pressed && styles.pressed}>
-            <Text style={styles.signOut}>Sair</Text>
+            <Text style={styles.signOut}>{t.profile.signOut}</Text>
           </Pressable>
           <Pressable
             onPress={deleteAccount}
             accessibilityRole="button"
             hitSlop={8}
             style={({ pressed }) => pressed && styles.pressed}>
-            <Text style={styles.deleteAccount}>Excluir conta</Text>
+            <Text style={styles.deleteAccount}>{t.profile.deleteAccount}</Text>
           </Pressable>
         </View>
       </ScrollView>

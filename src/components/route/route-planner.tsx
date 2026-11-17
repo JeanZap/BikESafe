@@ -33,6 +33,7 @@ import {
 } from '@/services/osrm';
 import { useAnnotationsStore } from '@/store/annotations-store';
 import { useNavigationStore } from '@/store/navigation-store';
+import { t } from '@/i18n';
 
 type Props = {
   destination: { title: string; coordinates: LngLat };
@@ -82,7 +83,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
         if (isAbortError(err)) return;
         setState({
           status: 'error',
-          message: err instanceof RouteError ? err.message : 'Erro ao calcular as rotas.',
+          message: err instanceof RouteError ? err.message : t.errors.routesFailed,
         });
       });
     return () => controller.abort();
@@ -154,7 +155,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
     else router.replace('/');
   }, [options, selected, origin, reversed, destination, startNavigation, router]);
 
-  const originLabel = 'Sua localização';
+  const originLabel = t.common.yourLocation;
   const fromLabel = reversed ? destination.title : originLabel;
   const toLabel = reversed ? originLabel : destination.title;
 
@@ -165,7 +166,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
         <Pressable
           onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Voltar"
+          accessibilityLabel={t.common.back}
           style={({ pressed }) => [styles.backButton, pressed && styles.pressed]}>
           <Icon name="back" size={20} color={Brand.text} />
         </Pressable>
@@ -189,7 +190,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
         <Pressable
           onPress={() => setReversed((r) => !r)}
           accessibilityRole="button"
-          accessibilityLabel="Inverter origem e destino"
+          accessibilityLabel={t.routePlanner.swapA11y}
           hitSlop={8}
           style={({ pressed }) => [styles.swapButton, pressed && styles.pressed]}>
           <Icon name="swap" size={26} color={Brand.text} />
@@ -302,14 +303,14 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
               <ActivityIndicator color={Brand.blue} />
               <Text style={styles.messageText}>
                 {state.status === 'loading'
-                  ? 'Calculando rotas de bicicleta…'
+                  ? t.routePlanner.calculating
                   : locationStatus === 'denied'
-                    ? 'Permita o acesso à localização para traçar a rota.'
-                    : 'Obtendo sua localização…'}
+                    ? t.routePlanner.locationDenied
+                    : t.common.gettingLocation}
               </Text>
               {state.status === 'waiting-location' && locationStatus !== 'loading' && (
                 <Pressable onPress={retryLocation} hitSlop={8}>
-                  <Text style={styles.link}>Tentar de novo</Text>
+                  <Text style={styles.link}>{t.common.tryAgain}</Text>
                 </Pressable>
               )}
             </View>
@@ -319,7 +320,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
             <View style={styles.message}>
               <Text style={styles.messageText}>{state.message}</Text>
               <Pressable onPress={() => setAttempt((a) => a + 1)} hitSlop={8}>
-                <Text style={styles.link}>Tentar de novo</Text>
+                <Text style={styles.link}>{t.common.tryAgain}</Text>
               </Pressable>
             </View>
           )}
@@ -327,7 +328,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
           {state.status === 'ready' && (
             <>
               <Text style={styles.sheetTitle}>
-                {options.length === 1 ? '1 ROTA DISPONÍVEL' : `${options.length} ROTAS DISPONÍVEIS`}
+                {t.routePlanner.available(options.length)}
               </Text>
 
               <View style={styles.options}>
@@ -381,7 +382,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
                   pressed && styles.startButtonPressed,
                   reversed && styles.startButtonDisabled,
                 ]}>
-                <Text style={styles.startButtonText}>Iniciar rota</Text>
+                <Text style={styles.startButtonText}>{t.routePlanner.start}</Text>
               </Pressable>
               {reversed && (
                 <Text style={styles.startHint}>
@@ -389,7 +390,7 @@ export function RoutePlanner({ destination, initialOrigin }: Props) {
                 </Text>
               )}
 
-              <Text style={styles.attribution}>Rotas: OSRM · © colaboradores do OpenStreetMap</Text>
+              <Text style={styles.attribution}>{t.routePlanner.attribution}</Text>
             </>
           )}
         </View>

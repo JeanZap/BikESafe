@@ -1,3 +1,4 @@
+import { t } from '@/i18n';
 /**
  * Busca de endereços/lugares por texto (geocodificação) via Photon.
  *
@@ -62,10 +63,10 @@ export async function searchPlaces(
     });
   } catch (err) {
     if (isAbortError(err)) throw err;
-    throw new GeocodingError('Sem conexão para buscar endereços.');
+    throw new GeocodingError(t.errors.searchOffline);
   }
 
-  if (!res.ok) throw new GeocodingError('Não foi possível buscar endereços agora.');
+  if (!res.ok) throw new GeocodingError(t.errors.searchUnavailable);
 
   const json = (await res.json().catch(() => null)) as { features?: PhotonFeature[] } | null;
   const features = json?.features ?? [];
@@ -89,7 +90,7 @@ export async function searchPlaces(
 function toPlace(feature: PhotonFeature): Place {
   const p = feature.properties;
   const streetLine = [p.street, p.housenumber].filter(Boolean).join(', ');
-  const title = p.name ?? (streetLine || p.city || p.state || 'Local sem nome');
+  const title = p.name ?? (streetLine || p.city || p.state || t.errors.unnamedPlace);
 
   const parts = [
     p.name && streetLine ? streetLine : null,

@@ -23,6 +23,7 @@ import { COLOR_HIGH, COLOR_MID } from '@/services/route-heat';
 import { distanceMeters, formatDistance, type LngLat } from '@/services/osrm';
 import { useAnnotationsStore } from '@/store/annotations-store';
 import { type FavoriteKind, usePlacesStore } from '@/store/places-store';
+import { t } from '@/i18n';
 
 type Props = {
   topInset: number;
@@ -45,8 +46,8 @@ const SUGGESTION_RADIUS_M = 40_000;
 const MAX_SUGGESTIONS = 4;
 
 const FAVORITES: { kind: FavoriteKind; label: string; icon: IconName }[] = [
-  { kind: 'home', label: 'Casa', icon: 'home' },
-  { kind: 'work', label: 'Trabalho', icon: 'work' },
+  { kind: 'home', label: t.search.home, icon: 'home' },
+  { kind: 'work', label: t.search.work, icon: 'work' },
 ];
 
 type Row = { place: Place; icon: IconName };
@@ -136,14 +137,14 @@ export function SearchHeader({
     return parts.join(' · ');
   };
 
-  const pickingLabel = picking === 'home' ? 'Casa' : 'Trabalho';
+  const pickingLabel = picking === 'home' ? t.search.home : t.search.work;
 
   return (
     <View style={[styles.header, { paddingTop: topInset + 12 }]}>
       <View style={styles.topRow}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Perfil"
+          accessibilityLabel={t.search.profileA11y}
           onPress={() => router.push('/profile')}
           hitSlop={8}
           style={({ pressed }) => [styles.iconButton, pressed && styles.pressed]}>
@@ -162,7 +163,7 @@ export function SearchHeader({
                 ref={inputRef}
                 value={query}
                 onChangeText={onChangeQuery}
-                placeholder={picking ? `Endereço de ${pickingLabel}` : 'Para onde vamos hoje?'}
+                placeholder={picking ? t.search.pickingPlaceholder(pickingLabel) : t.search.placeholder}
                 placeholderTextColor={Brand.textMuted}
                 style={styles.input}
                 returnKeyType="search"
@@ -179,12 +180,12 @@ export function SearchHeader({
                 onSubmitEditing={() => {
                   if (search.status === 'ready' && search.places[0]) choose(search.places[0]);
                 }}
-                accessibilityLabel="Buscar destino"
+                accessibilityLabel={t.search.searchA11y}
               />
               {search.status === 'loading' ? (
                 <ActivityIndicator size="small" color={Brand.textMuted} />
               ) : query.length > 0 ? (
-                <Pressable onPress={onClearQuery} hitSlop={10} accessibilityLabel="Limpar busca">
+                <Pressable onPress={onClearQuery} hitSlop={10} accessibilityLabel={t.search.clearA11y}>
                   <Icon name="close" size={20} color={Brand.textMuted} />
                 </Pressable>
               ) : (
@@ -200,10 +201,10 @@ export function SearchHeader({
                 {picking && (
                   <View style={styles.pickingBanner}>
                     <Text style={styles.pickingText}>
-                      Busque o endereço de {pickingLabel.toLowerCase()}
+                      {t.search.pickingHint(pickingLabel.toLowerCase())}
                     </Text>
                     <Pressable onPress={() => setPicking(null)} hitSlop={8}>
-                      <Text style={styles.pickingCancel}>Cancelar</Text>
+                      <Text style={styles.pickingCancel}>{t.common.cancel}</Text>
                     </Pressable>
                   </View>
                 )}
@@ -222,14 +223,14 @@ export function SearchHeader({
                           }}
                           accessibilityRole="button"
                           accessibilityHint={
-                            saved ? 'Toque e segure para trocar o endereço' : undefined
+                            saved ? t.search.changeAddressHint : undefined
                           }
                           style={({ pressed }) => [styles.favorite, pressed && styles.rowPressed]}>
                           <Icon name={fav.icon} size={20} color={Brand.text} />
                           <View style={styles.favoriteText}>
                             <Text style={styles.favoriteTitle}>{fav.label}</Text>
                             <Text style={styles.favoriteSubtitle} numberOfLines={1}>
-                              {saved ? saved.title : 'Definir endereço'}
+                              {saved ? saved.title : t.search.setAddress}
                             </Text>
                           </View>
                         </Pressable>
@@ -240,16 +241,16 @@ export function SearchHeader({
 
                 {typing ? (
                   <>
-                    {search.status === 'loading' && <Text style={styles.message}>Buscando…</Text>}
+                    {search.status === 'loading' && <Text style={styles.message}>{t.search.searching}</Text>}
                     {search.status === 'error' && (
                       <Text style={styles.message}>{search.message}</Text>
                     )}
                     {search.status === 'ready' && resultRows.length === 0 && (
-                      <Text style={styles.message}>Nenhum lugar encontrado.</Text>
+                      <Text style={styles.message}>{t.search.noResults}</Text>
                     )}
                     {resultRows.length > 0 && (
                       <>
-                        <Text style={styles.sectionTitle}>RESULTADOS</Text>
+                        <Text style={styles.sectionTitle}>{t.search.results}</Text>
                         {resultRows.map((row, i) => (
                           <PlaceRow
                             key={row.place.id}
@@ -268,7 +269,7 @@ export function SearchHeader({
                 ) : (
                   suggestions.length > 0 && (
                     <>
-                      <Text style={styles.sectionTitle}>SUGESTÕES PERTO DE VOCÊ</Text>
+                      <Text style={styles.sectionTitle}>{t.search.nearby}</Text>
                       {suggestions.map((row, i) => (
                         <PlaceRow
                           key={row.place.id}
@@ -288,7 +289,7 @@ export function SearchHeader({
 
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Filtros"
+          accessibilityLabel={t.search.filtersA11y}
           hitSlop={8}
           style={({ pressed }) => [styles.iconButton, pressed && styles.pressed]}>
           <Icon name="filters" size={30} color={Brand.text} />
@@ -304,14 +305,14 @@ export function SearchHeader({
         <Pressable
           onPress={toggleStreetHeat}
           accessibilityRole="togglebutton"
-          accessibilityLabel="Mapa de calor das ruas"
+          accessibilityLabel={t.search.heatA11y}
           accessibilityState={{ checked: streetHeat }}
           style={({ pressed }) => [
             styles.chip,
             streetHeat && styles.chipActive,
             pressed && styles.pressed,
           ]}>
-          <Text style={styles.chipLabel}>Calor</Text>
+          <Text style={styles.chipLabel}>{t.search.heat}</Text>
           <View style={styles.heatSwatch}>
             <View style={[styles.heatSwatchPart, { backgroundColor: Brand.teal }]} />
             <View style={[styles.heatSwatchPart, { backgroundColor: COLOR_MID }]} />

@@ -1,5 +1,6 @@
 import type { IconName } from '@/components/icon';
 import { Brand } from '@/constants/brand';
+import { t } from '@/i18n';
 
 /**
  * Tipos de ocorrido que o ciclista pode registrar anonimamente
@@ -12,61 +13,25 @@ export const OCCURRENCE_TYPES: {
   label: string;
   hint: string;
   /** Termos que também levam a este tipo no autocomplete. */
-  keywords: string[];
+  keywords: readonly string[];
   icon: IconName;
   color: string;
 }[] = [
   {
     id: 'infraction',
-    label: 'Infração',
-    hint: 'Avanço de sinal, contramão, veículo na ciclovia…',
-    keywords: [
-      'avanço de sinal',
-      'sinal vermelho',
-      'semáforo',
-      'contramão',
-      'carro na ciclovia',
-      'moto na ciclovia',
-      'estacionado na ciclovia',
-      'faixa de pedestre',
-      'multa',
-    ],
+    ...t.occurrences.infraction,
     icon: 'infraction',
     color: Brand.danger,
   },
   {
     id: 'dangerousDriving',
-    label: 'Condução perigosa',
-    hint: 'Fechada, ultrapassagem sem distância, excesso de velocidade…',
-    keywords: [
-      'fechada',
-      'ultrapassagem',
-      'distância',
-      'excesso de velocidade',
-      'racha',
-      'buzina',
-      'celular ao volante',
-      'quase atropelamento',
-      'direção perigosa',
-    ],
+    ...t.occurrences.dangerousDriving,
     icon: 'car',
     color: Brand.amber,
   },
   {
     id: 'badParking',
-    label: 'Bicicleta estacionada em local inapropriado',
-    hint: 'Bicicleta bloqueando calçada, rampa, faixa ou entrada.',
-    keywords: [
-      'bike',
-      'estacionada',
-      'calçada',
-      'rampa',
-      'acessibilidade',
-      'garagem',
-      'entrada',
-      'patinete',
-      'bloqueando',
-    ],
+    ...t.occurrences.badParking,
     icon: 'parking',
     color: Brand.blue,
   },

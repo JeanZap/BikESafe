@@ -8,6 +8,7 @@ import {
   OCCURRENCE_TYPES,
   type OccurrenceType,
 } from '@/constants/occurrences';
+import { t } from '@/i18n';
 
 type Props = {
   value: OccurrenceType | null;
@@ -84,14 +85,14 @@ export function OccurrenceTypeAutocomplete({ value, onChange }: Props) {
           onChangeText={handleChangeText}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder="Tipo de ocorrência (ex.: contramão, calçada…)"
+          placeholder={t.reportOccurrence.typePlaceholder}
           placeholderTextColor={Brand.textMuted}
           autoCorrect={false}
           returnKeyType="done"
           onSubmitEditing={() => {
             if (!selected && suggestions.length === 1) choose(suggestions[0].type.id);
           }}
-          accessibilityLabel="Tipo de ocorrência"
+          accessibilityLabel={t.reportOccurrence.typeA11y}
           style={[styles.input, selected && styles.inputSelected]}
         />
         {query.length > 0 && (
@@ -99,7 +100,7 @@ export function OccurrenceTypeAutocomplete({ value, onChange }: Props) {
             onPress={clear}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Limpar tipo">
+            accessibilityLabel={t.reportOccurrence.clearTypeA11y}>
             <Icon name="close" size={22} color={Brand.textMuted} />
           </Pressable>
         )}
@@ -130,7 +131,7 @@ export function OccurrenceTypeAutocomplete({ value, onChange }: Props) {
                 <View style={styles.itemTexts}>
                   <Text style={styles.itemLabel}>{type.label}</Text>
                   <Text style={styles.itemHint} numberOfLines={1}>
-                    {matchedKeyword ? `Corresponde a “${matchedKeyword}”` : type.hint}
+                    {matchedKeyword ? t.reportOccurrence.matches(matchedKeyword) : type.hint}
                   </Text>
                 </View>
               </Pressable>

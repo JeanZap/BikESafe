@@ -35,6 +35,7 @@ O BikESafe junta um mapa colaborativo de alertas com um roteador de bicicleta. C
 | ✅ | **Confirmação de incidentes** | Ao passar por um buraco ou acidente, o app pergunta se ele ainda está lá. |
 | 👤 | **Perfil** | Dados do ciclista e avaliação. |
 | 🧪 | **Simulação de trajeto** | Percorre a rota com velocidade de 1x, 3x ou 10x, útil para demonstrações. |
+| 🌐 | **Bilíngue** | Português ou inglês, conforme o idioma do aparelho (ou o idioma escolhido para o app no Android 13+). |
 
 ---
 
@@ -83,7 +84,21 @@ O roteador (OSRM) não aceita "evite estes pontos", então o BikESafe calcula as
 - **[Expo Router](https://docs.expo.dev/router/introduction/)**: navegação baseada em arquivos (`src/app/`)
 - **[MapLibre React Native](https://github.com/maplibre/maplibre-react-native)**: mapa vetorial
 - **[Zustand](https://github.com/pmndrs/zustand)**: estado global (alertas, ocorrências, navegação, lugares)
+- **[expo-localization](https://docs.expo.dev/versions/latest/sdk/localization/)**: idioma do aparelho (textos em `src/i18n/`)
 - `expo-location`, `expo-image-picker`, `expo-audio`, `react-native-reanimated`
+
+### Traduções
+
+Os textos ficam em `src/i18n/pt.ts` (que define as chaves) e `src/i18n/en.ts` (verificado pelo TypeScript para ter as mesmas chaves). Nos componentes, use `t`:
+
+```ts
+import { t } from '@/i18n';
+
+t.profile.title;              // "Perfil" / "Profile"
+t.annotation.minutesAgo(5);   // "há 5 min" / "5 min ago"
+```
+
+Qualquer idioma que não seja português usa inglês. As mensagens de permissão do iOS em português ficam em `languages/pt.json`.
 
 ### Serviços abertos (sem chave de API)
 
@@ -155,6 +170,7 @@ src/
 │   └── home/            # Cabeçalho de busca e marcador do usuário
 ├── services/            # Rotas (OSRM), geocodificação, segurança, mapa de calor, sons
 ├── hooks/               # Localização, navegação, busca, simulação, checagem de incidentes
+├── i18n/                # Textos em português e inglês
 ├── store/               # Estado global com Zustand
 ├── data/                # Alertas de exemplo e malha de ruas de Vitória
 └── constants/           # Tipos de alerta, cores da marca, tema e mapa

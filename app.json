@@ -8,7 +8,13 @@
     "scheme": "bike",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/images/icon.png"
+      "icon": "./assets/images/icon.png",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "locales": {
+      "pt": "./languages/pt.json"
     },
     "android": {
       "adaptiveIcon": {
@@ -44,14 +50,14 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "O BikESafe usa sua localização para mostrar onde você está e traçar rotas de bicicleta até o destino."
+          "locationWhenInUsePermission": "BikESafe uses your location to show where you are and plan bike routes to your destination."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "O BikESafe acessa suas fotos para anexar imagens aos alertas.",
-          "cameraPermission": "O BikESafe usa a câmera para fotografar o local do alerta.",
+          "photosPermission": "BikESafe accesses your photos to attach images to alerts.",
+          "cameraPermission": "BikESafe uses the camera to take a photo of the alert location.",
           "microphonePermission": false
         }
       ],
@@ -61,6 +67,12 @@
           "microphonePermission": false,
           "recordAudioAndroid": false,
           "enableBackgroundPlayback": false
+        }
+      ],
+      [
+        "expo-localization",
+        {
+          "supportedLocales": ["en", "pt"]
         }
       ]
     ],

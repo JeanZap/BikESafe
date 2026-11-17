@@ -7,6 +7,7 @@ import { Icon } from '@/components/icon';
 import { ALERT_TYPE_BY_ID } from '@/constants/alerts';
 import { Brand, BrandShadow } from '@/constants/brand';
 import type { Annotation } from '@/store/annotations-store';
+import { t } from '@/i18n';
 
 /** Sem interação, a pergunta some sozinha depois deste tempo. */
 export const HAZARD_CHECK_TIMEOUT_MS = 30_000;
@@ -50,7 +51,7 @@ export function HazardCheckCard({ annotation, onStillThere, onResolved }: Props)
 
   return (
     <View style={styles.card} accessibilityRole="alert">
-      <Text style={styles.question}>Você passou por aqui. Este problema ainda existe?</Text>
+      <Text style={styles.question}>{t.hazardCheck.question}</Text>
 
       <View style={styles.row}>
         {annotation.photoUri ? (
@@ -69,7 +70,7 @@ export function HazardCheckCard({ annotation, onStillThere, onResolved }: Props)
             </View>
             <View style={styles.status}>
               <View style={styles.statusDot} />
-              <Text style={styles.statusText}>Aberto</Text>
+              <Text style={styles.statusText}>{t.hazardCheck.open}</Text>
             </View>
           </View>
           <Text style={styles.title} numberOfLines={2}>
@@ -94,13 +95,13 @@ export function HazardCheckCard({ annotation, onStillThere, onResolved }: Props)
           onPress={onResolved}
           accessibilityRole="button"
           style={({ pressed }) => [styles.button, styles.resolvedButton, pressed && styles.pressed]}>
-          <Text style={styles.resolvedText}>Não existe mais</Text>
+          <Text style={styles.resolvedText}>{t.hazardCheck.resolved}</Text>
         </Pressable>
         <Pressable
           onPress={onStillThere}
           accessibilityRole="button"
           style={({ pressed }) => [styles.button, styles.stillButton, pressed && styles.pressed]}>
-          <Text style={styles.stillText}>Sim, continua</Text>
+          <Text style={styles.stillText}>{t.hazardCheck.stillThere}</Text>
         </Pressable>
       </View>
 

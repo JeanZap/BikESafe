@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "O BikESafe usa sua localização para mostrar onde você está e traçar rotas de bicicleta até o destino.",
+    "NSPhotoLibraryUsageDescription": "O BikESafe acessa suas fotos para anexar imagens aos alertas.",
+    "NSCameraUsageDescription": "O BikESafe usa a câmera para fotografar o local do alerta."
+  },
+  "android": {}
+}

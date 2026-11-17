@@ -18,6 +18,7 @@ import { type AlertType, ALERT_TYPE_BY_ID, ALERT_TYPES } from '@/constants/alert
 import { Brand } from '@/constants/brand';
 import type { NewAnnotation } from '@/store/annotations-store';
 import type { LngLat } from '@/services/osrm';
+import { t } from '@/i18n';
 
 type Props = {
   /** Local escolhido no mapa; `null` mantém o painel fechado. */
@@ -28,12 +29,7 @@ type Props = {
 };
 
 /** Texto sugerido pelo botão "Assistente" (simulado, sem IA por enquanto). */
-const ASSISTANT_SUGGESTIONS: Record<AlertType, string> = {
-  pothole: 'Buraco na pista, ocupando parte da faixa. Atenção ao desviar.',
-  accident: 'Acidente no local. Trânsito lento, redobre a atenção.',
-  bikeLane: 'Ciclovia com problema neste trecho (obstruída ou mal sinalizada).',
-  noLight: 'Trecho sem iluminação à noite. Use farol e roupas refletivas.',
-};
+const ASSISTANT_SUGGESTIONS: Record<AlertType, string> = t.reportAlert.suggestions;
 
 /** Painel de registro de alerta (protótipo 6). */
 export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Props) {
@@ -52,7 +48,7 @@ export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Prop
 
   const fillWithAssistant = () => {
     if (!type) {
-      Alert.alert('Assistente', 'Escolha o tipo do alerta para receber uma sugestão.');
+      Alert.alert(t.reportAlert.assistant, t.reportAlert.assistantPickType);
       return;
     }
     setDescription(ASSISTANT_SUGGESTIONS[type]);
@@ -81,7 +77,7 @@ export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Prop
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Pressable style={styles.flex} onPress={onClose} accessibilityLabel="Fechar" />
+        <Pressable style={styles.flex} onPress={onClose} accessibilityLabel={t.common.close} />
 
         <View style={[styles.sheet, { paddingBottom: bottomInset + 20 }]}>
           <View style={styles.handle} />
@@ -93,7 +89,7 @@ export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Prop
               <TextInput
                 value={description}
                 onChangeText={setDescription}
-                placeholder="Descrição"
+                placeholder={t.reportAlert.description}
                 placeholderTextColor={Brand.textMuted}
                 multiline
                 maxLength={280}
@@ -103,7 +99,7 @@ export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Prop
                 onPress={fillWithAssistant}
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.assistant, pressed && styles.pressed]}>
-                <Text style={styles.assistantText}>Assistente</Text>
+                <Text style={styles.assistantText}>{t.reportAlert.assistant}</Text>
                 <Icon name="sparkles" size={16} color={Brand.teal} />
               </Pressable>
             </View>
@@ -140,7 +136,7 @@ export function ReportAlertSheet({ point, bottomInset, onClose, onSubmit }: Prop
               pressed && { backgroundColor: Brand.mintPressed },
             ]}>
             <Icon name="megaphone" size={24} color={Brand.mintText} />
-            <Text style={styles.submitText}>Alerta</Text>
+            <Text style={styles.submitText}>{t.reportAlert.submit}</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>

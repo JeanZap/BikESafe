@@ -19,6 +19,7 @@ import { Brand } from '@/constants/brand';
 import type { OccurrenceType } from '@/constants/occurrences';
 import type { LngLat } from '@/services/osrm';
 import { approximate, type NewOccurrence } from '@/store/occurrences-store';
+import { t } from '@/i18n';
 
 type Props = {
   visible: boolean;
@@ -75,7 +76,7 @@ export function ReportOccurrenceSheet({ visible, position, bottomInset, onClose,
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Pressable style={styles.backdrop} onPress={close} accessibilityLabel="Fechar" />
+        <Pressable style={styles.backdrop} onPress={close} accessibilityLabel={t.common.close} />
 
         <View style={styles.sheet}>
           <View style={styles.handle} />
@@ -84,10 +85,10 @@ export function ReportOccurrenceSheet({ visible, position, bottomInset, onClose,
             keyboardShouldPersistTaps="handled"
             contentContainerStyle={[styles.content, { paddingBottom: bottomInset + 20 }]}>
             <View style={styles.header}>
-              <Text style={styles.title}>Registrar ocorrência</Text>
+              <Text style={styles.title}>{t.reportOccurrence.title}</Text>
               <View style={styles.anonymousBadge}>
                 <Icon name="anonymous" size={16} color={Brand.mintText} />
-                <Text style={styles.anonymousText}>Anônimo</Text>
+                <Text style={styles.anonymousText}>{t.reportOccurrence.anonymous}</Text>
               </View>
             </View>
             <Text style={styles.subtitle}>
@@ -102,7 +103,7 @@ export function ReportOccurrenceSheet({ visible, position, bottomInset, onClose,
                 <TextInput
                   value={description}
                   onChangeText={setDescription}
-                  placeholder="O que aconteceu? (opcional) Ex.: placa, cor do veículo, horário"
+                  placeholder={t.reportOccurrence.descriptionPlaceholder}
                   placeholderTextColor={Brand.textMuted}
                   multiline
                   maxLength={400}
@@ -114,13 +115,13 @@ export function ReportOccurrenceSheet({ visible, position, bottomInset, onClose,
             {position && (
               <View style={styles.locationRow}>
                 <Icon name="pin" size={20} color={Brand.textMuted} />
-                <Text style={styles.locationText}>Anexar local aproximado (~100 m)</Text>
+                <Text style={styles.locationText}>{t.reportOccurrence.attachLocation}</Text>
                 <Switch
                   value={attachLocation}
                   onValueChange={setAttachLocation}
                   trackColor={{ true: Brand.mint, false: Brand.border }}
                   thumbColor="#FFFFFF"
-                  accessibilityLabel="Anexar local aproximado"
+                  accessibilityLabel={t.reportOccurrence.attachLocationA11y}
                 />
               </View>
             )}
@@ -135,7 +136,7 @@ export function ReportOccurrenceSheet({ visible, position, bottomInset, onClose,
                 pressed && styles.submitPressed,
               ]}>
               <Icon name="anonymous" size={22} color="#FFFFFF" />
-              <Text style={styles.submitText}>Enviar anonimamente</Text>
+              <Text style={styles.submitText}>{t.reportOccurrence.submit}</Text>
             </Pressable>
           </ScrollView>
         </View>

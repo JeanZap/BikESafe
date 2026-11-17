@@ -2,6 +2,7 @@ import type { IconName } from '@/components/icon';
 import type { BikeRoute } from '@/services/osrm';
 import { describeSafety, type RouteSafety, scoreRoute } from '@/services/route-safety';
 import type { Annotation } from '@/store/annotations-store';
+import { t } from '@/i18n';
 
 export type RouteKind = 'safest' | 'fastest' | 'flattest' | 'alternative';
 
@@ -16,10 +17,10 @@ export type RouteOption = {
 };
 
 const META: Record<RouteKind, { title: string; icon: IconName }> = {
-  safest: { title: 'Mais segura', icon: 'shield' },
-  fastest: { title: 'Mais rápida', icon: 'bolt' },
-  flattest: { title: 'Menos subidas', icon: 'mountain' },
-  alternative: { title: 'Alternativa', icon: 'bike' },
+  safest: { title: t.routeKinds.safest, icon: 'shield' },
+  fastest: { title: t.routeKinds.fastest, icon: 'bolt' },
+  flattest: { title: t.routeKinds.flattest, icon: 'mountain' },
+  alternative: { title: t.routeKinds.alternative, icon: 'bike' },
 };
 
 /** Ordem em que as opções aparecem na lista (igual ao protótipo). */
@@ -63,7 +64,7 @@ export function buildRouteOptions(routes: BikeRoute[], annotations: Annotation[]
         kind,
         route,
         safety,
-        title: combined ? 'Mais rápida e segura' : META[kind].title,
+        title: combined ? t.routeKinds.fastestAndSafest : META[kind].title,
         icon: combined ? 'shield' : META[kind].icon,
         subtitle: describeSafety(safety),
       };
